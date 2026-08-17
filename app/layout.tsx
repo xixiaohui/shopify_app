@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -27,13 +26,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Script
-          src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
-          strategy="beforeInteractive"
-        />
-        {children}
-      </body>
+      <head>
+        {/* App Bridge requires a plain synchronous <script> tag (no async, defer,
+            or type=module). next/script loads it asynchronously, which App Bridge
+            rejects before defining the `shopify` global. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" />
+      </head>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
