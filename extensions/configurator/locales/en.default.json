@@ -1,0 +1,27 @@
+{
+  "blocks": {
+    "configurator": {
+      "name": "Product configurator",
+      "noscript": "Enable JavaScript to configure this product.",
+      "no_product": "Select a product for this block, or place it on a product page.",
+      "settings": {
+        "product": {
+          "label": "Product",
+          "info": "Defaults to the current page's product when left empty."
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "show_price": {
+          "label": "Show live price"
+        },
+        "button_label": {
+          "label": "Button label"
+        },
+        "accent_color": {
+          "label": "Accent color"
+        }
+      }
+    }
+  }
+}

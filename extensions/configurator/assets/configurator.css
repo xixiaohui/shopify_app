@@ -1,0 +1,91 @@
+.configurator {
+  --configurator-accent: #2c6ecb;
+  display: block;
+  max-width: 32rem;
+  font-family: inherit;
+}
+
+.configurator__heading {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.configurator__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.configurator__option {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.configurator__option-name {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.configurator__values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.configurator__value {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgb(0 0 0 / 20%);
+  border-radius: 0.375rem;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.configurator__value:hover {
+  border-color: var(--configurator-accent);
+}
+
+.configurator__value.is-selected {
+  border-color: var(--configurator-accent);
+  background: var(--configurator-accent);
+  color: #fff;
+}
+
+.configurator__footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.configurator__price {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.configurator__submit {
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: var(--configurator-accent);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.configurator__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.configurator--empty {
+  padding: 1rem;
+  border: 1px dashed rgb(0 0 0 / 30%);
+  border-radius: 0.375rem;
+  color: rgb(0 0 0 / 60%);
+  font-size: 0.875rem;
+}

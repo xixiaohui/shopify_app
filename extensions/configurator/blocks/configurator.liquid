@@ -1,0 +1,82 @@
+{%- liquid
+  assign current_product = block.settings.product | default: product
+-%}
+
+{{ 'configurator.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'configurator.js' | asset_url }}" defer></script>
+
+{%- if current_product != blank -%}
+  <product-configurator
+    class="configurator"
+    style="--configurator-accent: {{ block.settings.accent_color }};"
+    data-currency="{{ shop.currency }}"
+    data-show-price="{{ block.settings.show_price }}"
+    data-button-label="{{ block.settings.button_label | escape }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.heading != blank -%}
+      <h2 class="configurator__heading">{{ block.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="configurator__body" data-configurator-body>
+      <noscript>
+        <p>{{ 'blocks.configurator.noscript' | t }}</p>
+      </noscript>
+    </div>
+
+    <script type="application/json" data-configurator-product>
+      {
+        "id": {{ current_product.id }},
+        "title": {{ current_product.title | json }},
+        "options": {{ current_product.options_with_values | json }},
+        "variants": {{ current_product.variants | json }}
+      }
+    </script>
+  </product-configurator>
+{%- else -%}
+  <div class="configurator configurator--empty" {{ block.shopify_attributes }}>
+    <p>{{ 'blocks.configurator.no_product' | t }}</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.configurator.name",
+  "target": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:blocks.configurator.settings.product.label",
+      "info": "t:blocks.configurator.settings.product.info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:blocks.configurator.settings.heading.label",
+      "default": "Configure your product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "t:blocks.configurator.settings.show_price.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:blocks.configurator.settings.button_label.label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "t:blocks.configurator.settings.accent_color.label",
+      "default": "#2c6ecb"
+    }
+  ]
+}
+{% endschema %}
