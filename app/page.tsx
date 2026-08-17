@@ -30,7 +30,10 @@ export default function Home() {
         if (cancelled) return;
 
         if (!res.ok) {
-          setError(`Request failed with status ${res.status}`);
+          const detail = await res.text().catch(() => "");
+          setError(
+            `Request failed with status ${res.status}${detail ? `: ${detail}` : ""}`,
+          );
           setStatus("error");
           return;
         }
